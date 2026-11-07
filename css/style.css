@@ -1,0 +1,5 @@
+/* Override bootstrap default colors */
+:root {
+    --bs-primary: #d4af37;
+    --bs-primary-rgb: 212, 175, 55;
+}
