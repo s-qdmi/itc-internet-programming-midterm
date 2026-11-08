@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A comprehensive task management application.">
+    <meta name="description" content="An application for managing and downloading e-books.">
     <title>My Library - eLibrary</title> <!-- CHANGE THIS PER PAGE -->
 
     <!-- CSS -->
@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" defer></script>
     <script src="js/main.js" defer></script>
+    <script src="js/tasks.js" defer></script>
 </head>
 <body>
 
@@ -23,11 +24,219 @@
 
     <!-- ================= MAIN CONTENT ================= -->
     <main class="container my-4">
-        <h1>>>Tasks page placeholder</h1>
+        
+        <!-- Page Title -->
+        <section class="text-center mb-5">
+            <h1 class="display-4 fw-bold">My Library</h1>
+            <p class="lead text-muted">Manage your borrowed books</p>
+        </section>
+
+        <!-- Summary Cards -->
+        <section class="mb-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm bg-primary text-white">
+                        <div class="card-body text-center">
+                            <i class="bi bi-book display-4"></i>
+                            <h3 class="mt-2" id="total">0</h3>
+                            <p class="mb-0">Total Books</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm bg-warning text-dark">
+                        <div class="card-body text-center">
+                            <i class="bi bi-clock display-4"></i>
+                            <h3 class="mt-2" id="pendingBooks">0</h3>
+                            <p class="mb-0">Currently Borrowed</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm bg-success text-white">
+                        <div class="card-body text-center">
+                            <i class="bi bi-check-circle display-4"></i>
+                            <h3 class="mt-2" id="returnedBooks">0</h3>
+                            <p class="mb-0">Returned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Book Form -->
+        <section class="mb-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="mb-4"><i class="bi bi-plus-circle-fill text-primary me-2"></i>Add a Book</h3>
+                    <form id="bookForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="bookCode" class="form-label">Book Code / ISBN <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="bookCode" placeholder="e.g., BK-10293" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="returnDate" class="form-label">Expected Return Date</label>
+                                <input type="date" class="form-control" id="returnDate">
+                            </div>
+                            <div class="col-12">
+                                <label for="userNotes" class="form-label">Notes (Author, Title, etc.)</label>
+                                <textarea class="form-control" id="userNotes" rows="2" placeholder="e.g., The Great Gatsby by F. Scott Fitzgerald"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="bookPriority" class="form-label">Priority</label>
+                                <select class="form-select" id="bookPriority">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 d-flex align-items-end">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-plus-lg me-2"></i>Add Book
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <!-- Filters and Search -->
+        <section class="mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="searchBook" class="form-label"><i class="bi bi-search me-1"></i>Live Search</label>
+                            <input type="text" class="form-control" id="searchBook" placeholder="Search by code or notes...">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="filterStatus" class="form-label"><i class="bi bi-funnel me-1"></i>Filter by Status</label>
+                            <select class="form-select" id="filterStatus">
+                                <option value="all" selected>All Statuses</option>
+                                <option value="borrowed">Currently Borrowed</option>
+                                <option value="returned">Returned</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="sortBy" class="form-label"><i class="bi bi-sort-down me-1"></i>Sort by</label>
+                            <select class="form-select" id="sortBy">
+                                <option value="newest" selected>Newest Added</option>
+                                <option value="oldest">Oldest Added</option>
+                                <option value="returnDate">Expected Return Date</option>
+                                <option value="priority">Priority (High to Low)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Book Table -->
+        <section class="mb-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h3 class="mb-4"><i class="bi bi-list-ul text-primary me-2"></i>My Books</h3>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Book Code</th>
+                                    <th>Notes</th>
+                                    <th>Return Date</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookTableBody">
+                                <!-- Rows will be injected here by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Kanban Board -->
+        <section class="mb-5">
+            <h2 class="mb-4"><i class="bi bi-kanban-fill text-primary me-2"></i>Kanban Board</h2>
+            <p class="text-muted mb-3">Drag and drop books between columns to update their status</p>
+            <div class="row g-3">
+                <!-- Column 1: Borrowed -->
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">
+                                <i class="bi bi-book me-2"></i>Borrowed 
+                                <span class="badge bg-dark ms-2" id="count-borrowed">0</span>
+                            </h5>
+                        </div>
+                        <div class="card-body kanban-column" id="kanban-borrowed" style="min-height: 200px;">
+                            <!-- Books will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Column 2: Returned -->
+                <div class="col-md-6">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">
+                                <i class="bi bi-check-circle me-2"></i>Returned 
+                                <span class="badge bg-light text-dark ms-2" id="count-returned">0</span>
+                            </h5>
+                        </div>
+                        <div class="card-body kanban-column" id="kanban-returned" style="min-height: 200px;">
+                            <!-- Books will be added here dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <!-- Footer will be injected here by JavaScript -->
     <div id="footer-placeholder"></div>
 
+    <!-- ================= EDIT BOOK MODAL ================= -->
+    <div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="editBookModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="editBookModalLabel"><i class="bi bi-pencil-square me-2"></i>Edit Book</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Hidden field to store the book ID -->
+                    <input type="hidden" id="editBookId">
+                    
+                    <div class="mb-3">
+                        <label for="editBookCode" class="form-label">Book Code / ISBN</label>
+                        <input type="text" class="form-control" id="editBookCode" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editReturnDate" class="form-label">Expected Return Date</label>
+                        <input type="date" class="form-control" id="editReturnDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="editUserNotes" class="form-label">Notes (Author, Title, etc.)</label>
+                        <textarea class="form-control" id="editUserNotes" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editBookPriority" class="form-label">Priority</label>
+                        <select class="form-select" id="editBookPriority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveEditBookBtn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
