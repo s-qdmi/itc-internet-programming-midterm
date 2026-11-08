@@ -25,17 +25,82 @@
     <main class="container my-4">
         <section class="text-center mb-5">
             <div class="container">
-                <h1 class="fw-bold text-primary">About eLibrary</h1>
-                <p1>>>Placeholder about section, should include information about the application, its purpose and its features</p1>
+                <h2 class="fw-bold text-primary">About eLibrary</h2>
+                <p1>eLibrary's goal is to combine the advantages of physical and digital literature. By providing digital and audio copies of a book, users are not fully constrained by the "time limit" of traditional borrowing but can still enjoy a screenless reading experience. eLibrary's loose DRM for digital copies allows readers to permanently own a copy what they've read for an affordable price.</p1>
+            </div>
+        <section class="mb-5">
+            <h2 class="text-center text-primary">eLibrary Employees</h2>
+            <div class="row g-4">
+                <!-- Employee Card (copy/paste to add more employees) -->
+                <div class="col-md-6 col-lg-3 mx-auto">
+                    <div class="card h-100 text-center">
+                        <img src="assets/images/default-profile-picture.jpg" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;" alt="Profile picture">
+                        <div class="card-body">
+                            <h5 class="card-title">John Doe</h5>
+                            <p class="text-primary fw-bold mb-2">Outreach Manager</p>
+                            <p class="card-text small">Manages communication with our approved vendors.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pb-3">
+                            <a href="#" class="text-decoration-none me-2" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
+                            <a href="#" class="text-decoration-none me-2" aria-label="Twitter"><i class="bi bi-twitter-x fs-5"></i></a>
+                            <a href="mailto:sarah@taskmaster.com" class="text-decoration-none" aria-label="Email"><i class="bi bi-envelope-fill fs-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of card -->
+
+                <!-- Employee Card (copy/paste to add more employees) -->
+                <div class="col-md-6 col-lg-3 mx-auto">
+                    <div class="card h-100 text-center">
+                        <img src="assets/images/default-profile-picture.jpg" class="card-img-top rounded-circle mx-auto mt-4" style="width: 120px; height: 120px; object-fit: cover;" alt="Profile picture">
+                        <div class="card-body">
+                            <h5 class="card-title">Jane Doe</h5>
+                            <p class="text-primary fw-bold mb-2">Customer Support</p>
+                            <p class="card-text small">One of our customer support staff members, available for contact in case there are any issues with eLibrary services.</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-0 pb-3">
+                            <a href="#" class="text-decoration-none me-2" aria-label="LinkedIn"><i class="bi bi-linkedin fs-5"></i></a>
+                            <a href="#" class="text-decoration-none me-2" aria-label="Twitter"><i class="bi bi-twitter-x fs-5"></i></a>
+                            <a href="mailto:sarah@taskmaster.com" class="text-decoration-none" aria-label="Email"><i class="bi bi-envelope-fill fs-5"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of card -->
             </div>
         </section>
         <section class="mb-5">
-            <h2 class="text-center fw-bold text-primary">eLibrary Employees</h2>
-            <p1>>>Employee cards placeholder</p1>
-        </section>
-        <section class="mb-5">
-            <h2 class="text-center fw-bold text-primary">Testimonials</h2>
-            <p1>>>Testimonials carousel placeholder</p1>
+            <h2 class="text-center fw-bold text-primary mb-4">Testimonials</h2>
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <!-- Active carousel item -->
+                    <div class="carousel-item active">
+                        <img src="assets/images/testimonial1.jpg" class="d-block w-100" alt="Testimonial 1">
+                        <div class="carousel-caption bg-dark bg-opacity-50 rounded-3 p-3">
+                            <h5 class="text-white fw-bold">"eLibrary has helped me sell my books much more efficiently"</h5>
+                            <p class="text-white mb-0">-Jane Doe, Author</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Carousel item -->
+                    <div class="carousel-item">
+                        <img src="assets/images/testimonial2.jpg" class="d-block w-100" alt="Testimonial 2">
+                        <div class="carousel-caption bg-dark bg-opacity-50 rounded-3 p-3">
+                            <h5 class="text-white fw-bold">"I can always access my engineering resources even after I've studied them thanks to eLibrary"</h5>
+                            <p class="text-white mb-0">-John Doe, Engineer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </section>
     </main>
 
